@@ -8,6 +8,7 @@ var player = {
 	width:20,
 	height:40,
 	slideCount: 0,
+	jumping: false,
 	color:'blue',
 	
 	normal: function(){
@@ -25,8 +26,11 @@ var player = {
 	},
 	
 	jump: function(){
-		if(player.slideCount < 0){
-			this.spdY -= 10;
+		if(this.slideCount < 0){
+			if(!this.jumping){
+				this.spdY -= 10;
+				this.jumping = true;
+			}
 		}
 	},
 	
@@ -53,6 +57,7 @@ var player = {
 			if(this.spdY > 0){
 				this.spdY = 0;
 			}
+			this.jumping = false;
 		}
 	},
 	
