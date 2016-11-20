@@ -7,12 +7,14 @@ var player = {
 	accY: gravity,
 	width:20,
 	height:40,
+	slideCount: 0,
 	color:'blue',
 	
 	normal: function(){
 		ctx.clearRect(this.x,this.y,this.width,this.height);
-		this.y -= this.height;
-		this.height = this.height * 2;
+		this.y = canvas.height/2;
+		this.height = 40;
+		this.width = 20;
 	},
 	
 	draw: function(){
@@ -23,13 +25,20 @@ var player = {
 	},
 	
 	jump: function(){
-		this.spdY -= 10;
+		if(player.slideCount < 0){
+			this.spdY -= 10;
+		}
 	},
 	
 	slide: function(){
-		ctx.clearRect(this.x,this.y,this.width,this.height);
-		this.height = this.height/2;
-		this.y += this.height;
+		if(this.slideCount <= 0){
+			ctx.clearRect(this.x,this.y,this.width,this.height);
+			this.height = this.height/2;
+			this.width *= 2;
+			this.y += this.height;
+			
+			this.slideCount += 40;
+		}
 	},
 	
 	move: function(){
